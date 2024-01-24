@@ -1,3 +1,13 @@
+body {
+  background-color: #F4F4F4;
+  color: #333333;
+  margin-bottom: 50px;
+}
+
+h1 {
+  text-align: center;
+}
+
 code {
   background: #d0d0d5;
 }
@@ -48,7 +58,7 @@ td {
 }
 
 .yAxisLegend {
-  margin-top: 50px;
+  margin-top: 40px;
   text-align: right;
   font-weight: bold;
 }
@@ -101,4 +111,14 @@ td {
   .form-container {
     align-self: center;
   }
+}
+
+form {
+  padding: 15px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-width: 1px;
+  margin: 10px;
+  border-radius: 3px;
+  background-color: #FFF;
 }

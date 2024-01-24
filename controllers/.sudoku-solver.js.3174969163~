@@ -2,6 +2,7 @@ class SudokuSolver {
 
   validate(puzzleString) {
     const regex = /^[1-9|.]+/;
+    
     if(puzzleString.length!=81)
       return 'Expected puzzle to be 81 characters long';
     if(![...puzzleString].every(char => regex.test(char)))
@@ -29,8 +30,9 @@ class SudokuSolver {
       puzzleGrid = this.stringToGrid(puzzleString)
     let rowToNum = row.charCodeAt(0) - 65
 
-    if(puzzleGrid[rowToNum].includes(value) && (puzzleGrid[rowToNum].indexOf(value) != column-1))
+    if(puzzleGrid[rowToNum].includes(value) && puzzleGrid[rowToNum].indexOf(value)!=column-1) {
       return false
+    }
     return true
   }
 
@@ -40,8 +42,9 @@ class SudokuSolver {
       puzzleGrid = this.stringToGrid(puzzleString)
     let rowToNum = row.charCodeAt(0) - 65 
     for(let i=0; i<9; i++) {
-      if(puzzleGrid[i][column-1] == value && rowToNum!=i)
+      if(puzzleGrid[i][column-1] == value && rowToNum!=i) {
         return false
+      }
     }
     return true
   }
@@ -57,8 +60,9 @@ class SudokuSolver {
 
     for(let i=startRow; i<=startRow+2; i++) {
       for(let j=startColumn; j<=startColumn+2; j++) {
-        if(puzzleGrid[i][j] == value && puzzleGrid[rowToNum][column] != value)
+        if(puzzleGrid[i][j] == value && puzzleGrid[rowToNum][column]!=value) {
           return false
+        }
       }
     }
     return true
@@ -67,10 +71,10 @@ class SudokuSolver {
   checkString(puzzleGrid) {
     for(let row=0; row<9; row++) {
       for(let col=0; col<9; col++) {
-        if(puzzleGrid[row][col] != '.') {
-          let rowIsValid = this.checkRowPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, puzzleGrid[row][col].toString())
-          let columnIsValid = this.checkColPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, puzzleGrid[row][col].toString())
-          let regionIsValid = this.checkRegionPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, puzzleGrid[row][col].toString())
+        if(puzzleGrid[ro][col] != '.') {
+          let rowIsValid = this.checkRowPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, value.toString())
+          let columnIsValid = this.checkColPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, value.toString())
+          let regionIsValid = this.checkRegionPlacement(puzzleGrid, String.fromCharCode(row + 65), col+1, value.toString())
           if(!rowIsValid || !columnIsValid || !regionIsValid)
             return false
         }
@@ -105,6 +109,7 @@ class SudokuSolver {
                 return puzzleGrid;
             }
           }
+
           puzzleGrid[row][col] = '.';
           return false;
         }
@@ -112,6 +117,7 @@ class SudokuSolver {
     }
     return puzzleGrid;
   }
+
 }
 
 module.exports = SudokuSolver;
